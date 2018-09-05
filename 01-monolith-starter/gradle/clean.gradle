@@ -1,0 +1,15 @@
+allprojects {
+  apply plugin: 'base'
+
+  clean.doFirst {
+    [
+        project.buildDir,
+        project.file('out'),
+        project.file('bin'),
+        project.file('build'),
+        project.file("$rootDir/src/js/.cache"),
+        project.file("$rootDir/src/js/node_modules"),
+        project.file("$rootDir/src/main/resources/public"),
+    ].each { delete it }
+  }
+}

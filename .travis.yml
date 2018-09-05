@@ -1,0 +1,81 @@
+notifications:
+  email: false
+env:
+  global:
+  - TERM=dumb
+  - secure: psIPgUGJgYSHW7ceRKlDleZ0CSfNaLtv2CEnQxowvzvGsBxUp5lzU2weIGQNFJ7cfEoExlql2uh+KgJUhVN4wYH8sR3ZlRW6EO4Tqi4aj05hkf/3Kv7SO6zYdeHR8NcmCA/EdFBwJ6wBUMRuTQHSf750Rs9VtHQajoGAa0rvBNEUTRkUtU3ztSSrhir6EbqXjX90i431fvYt53kK0F5c7ZDUhUSIQ2c3+4zkatZxPoX4+ahOb4B05lrSkdsLBVbAjE3j2goKyV5FP/dF4GOZsGoMRmyOf4Xe2t4YQr3mWLUx3LyrbW4ZeCpbqgi5S1Pw4CsNM/M7RHs5eUJ2xZore/8GuUz9EYDV0JnZw6TlMu8USNCvjGfu+zVu4RhlIpYRcQ5b9wPlB4dQEYxO0B4Ggrj4KFXd31WQKwEUgRq8alFkWoFUE3QtTxBrVFxIxqod4jH9oiD5P07tgFlbrQAhJZkt+ilCnArrv6Q7Yu2gxOO5l3U+6VGoK4qHRFtVYxV6P74dChd1bhBrihXqYY0kOMToy7BcyN+VKE1PvCgyL5kCF74MNnyXtJhGoI83KueBxp+MPnjjhSS5Rs9jiGUI5vk6AoXHPlIfblwIDSyKcN5xwdoXx1b1Zi5FaK0BUAediS9dG0v7DtV0k7F6I6HQanDn2h4nmd+am7osx0oywww=
+language: java
+jdk: oraclejdk8
+service:
+- docker
+addons:
+  apt:
+    update: true
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+    - libappindicator1
+    - fonts-liberation
+    - bash
+    - curl
+    - libxml2-utils
+    - docker-ce
+install: true
+before_install:
+- export CHROME_BIN=/usr/bin/google-chrome
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+#
+- sudo add-apt-repository universe -y >/dev/null
+- echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list >/dev/null
+- sudo apt-get update -yqq >/dev/null
+- sudo apt-get install -yqq --no-install-suggests --no-install-recommends
+  tree jq python-pip curl bash sudo >/dev/null
+#
+- sudo pip install docker-compose httpie >/dev/null 2>&1
+#
+- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+- stop_any 8080 3000 80 >/dev/null
+script:
+- export root=$(pwd)
+#
+- bash mvnw >/dev/null
+- bash gradlew >/dev/null
+#
+- ./gradlew -b ${root}/01-monolith-starter/build.gradle >/dev/null
+- bash ${root}/01-monolith-starter/build/libs/*.jar &
+- wait_for 8080
+- http :8080/
+- http :8080/api/
+- stop_any 8080 80
+#
+- ./mvnw -f ${root}/01-monolith-starter/pom.xml >/dev/null
+- bash ${root}/01-monolith-starter/target/*.jar &
+- wait_for 8080
+- http :8080/
+- http :8080/api/
+- stop_any 8080 80
+before_deploy:
+- cd ${root}
+- "./mvnw -Pdocs"
+- mkdir -p ./target/generated-docs
+- cp -Rf ./target/generated-docs/index.html ./target/generated-docs/404.html
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: "$GITHUB_TOKEN"
+  keep-history: true
+  on:
+    branch: master
+  local-dir: target/generated-docs
+  target_branch: gh-pages
+before_cache:
+- for item in $(find ~/.gradle -name "*.lock");
+    do sudo rm -rf $item ;
+  done
+cache:
+  directories:
+  - "$HOME/.m2"
+  - "$HOME/.gradle"
+  - "$HOME/.docker"

@@ -1,0 +1,3 @@
+rootProject.name = 'spring-book'
+enableFeaturePreview 'STABLE_PUBLISHING'
+include 'docs'

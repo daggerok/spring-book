@@ -1,0 +1,2 @@
+rootProject.name = '01-monolith-starter'
+enableFeaturePreview 'STABLE_PUBLISHING'
