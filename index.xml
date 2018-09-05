@@ -4,7 +4,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>spring-book (0.0.1)</title>
-<date>2018-09-05 02:48:29 UTC</date>
+<date>2018-09-05 02:52:48 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -16,7 +16,7 @@
 <revhistory>
 <revision>
 <revnumber>0.0.1</revnumber>
-<date>2018-09-05 02:48:29 UTC</date>
+<date>2018-09-05 02:52:48 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -33,7 +33,11 @@ will build fully functional, stable and production-ready app</simpara>
 <title>Implementation</title>
 <section xml:id="starter-monolith">
 <title>Starter monolith</title>
-<simpara>Unresolved directive in index.adoc - include::../01-monolith-starter[tags=content]</simpara>
+
+</section>
+<section xml:id="01-monolith-starter">
+<title>01-monolith-starter</title>
+<simpara>TODO</simpara>
 </section>
 </chapter>
 <chapter xml:id="links">
