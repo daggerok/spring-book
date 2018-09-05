@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc maxdepth="4"?>
+<?asciidoc-numbered?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>spring-book (0.0.1)</title>
+<date>2018-09-05 01:16:21 UTC</date>
+<author>
+<personname>
+<firstname>Maksim</firstname>
+<surname>Kostromin</surname>
+</personname>
+<email>daggerok@gmail.com</email>
+</author>
+<authorinitials>MK</authorinitials>
+<revhistory>
+<revision>
+<revnumber>0.0.1</revnumber>
+<date>2018-09-05 01:16:21 UTC</date>
+<authorinitials>MK</authorinitials>
+</revision>
+</revhistory>
+</info>
+<chapter xml:id="introduction">
+<title>Introduction</title>
+<simpara>SB&#8201;&#8212;&#8201;It&#8217;s a spring-boot facebook clone application (sets
+of applications), where we will try go from simple monolith
+app to scalable micro-service system. By applying SOLID and
+agile principles, CQRS, event-driven and DDD techniques to
+build fully functional, stable and production-ready system</simpara>
+</chapter>
+<chapter xml:id="implementation">
+<title>Implementation</title>
+<section xml:id="starter-monolith">
+<title>Starter monolith</title>
+<simpara>Unresolved directive in index.adoc - include::../01-monolith-starter[tags=content]</simpara>
+</section>
+</chapter>
+<chapter xml:id="links">
+<title>Links</title>
+<itemizedlist>
+<listitem>
+<simpara><link xl:href="https://github.com/daggerok/spring-book">GitHub repo</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://daggerok.github.io/spring-book">GitHub pages</link></simpara>
+</listitem>
+</itemizedlist>
+</chapter>
+</book>
