@@ -1,19 +1,24 @@
 <template lang="html">
   <div class="app">
-    <h1>App</h1>
-    <Feed/>
-    <Personal/>
+    <NavBar/>
+    <PublicFeed/>
+    <PersonalFeed/>
   </div>
 </template>
 
 <script>
-  import Feed from './app/Feed';
-  import Personal from './app/Personal';
+  import PublicFeed from './app/PublicFeed';
+  import PersonalFeed from './app/PersonalFeed';
+  import NavBar from './app/commons/NavBar';
   export default {
     name: 'app',
     components: {
-      Feed,
-      Personal,
+      NavBar,
+      PublicFeed,
+      PersonalFeed,
+    },
+    mounted() {
+      console.log(this.$vnode.tag, this.$root.$data.store);
     },
   }
 </script>

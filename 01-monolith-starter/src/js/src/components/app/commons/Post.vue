@@ -9,7 +9,10 @@
     name: 'post',
     props: [
       'post',
-    ]
+    ],
+    mounted() {
+      console.log(this.$vnode.tag, this.props.post);
+    },
   }
 </script>
 

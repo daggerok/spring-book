@@ -17,6 +17,9 @@
         { body: 'trololo', },
       ],
     }),
+    mounted() {
+      console.log(this.$vnode.tag, this.props.posts);
+    },
   }
 </script>
 
