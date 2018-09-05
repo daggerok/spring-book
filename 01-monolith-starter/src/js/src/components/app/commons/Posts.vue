@@ -18,7 +18,7 @@
       ],
     }),
     mounted() {
-      console.log(this.$vnode.tag, this.props.posts);
+      //console.log(this.$vnode.tag, this.props.posts);
     },
   }
 </script>

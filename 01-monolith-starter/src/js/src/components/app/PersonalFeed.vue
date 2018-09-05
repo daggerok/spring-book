@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="personal-feed"
-       v-if="this.$root.$data.store.state.currentTab === this.$root.$data.store.state.tabs.personalFeed">
+       v-if="currentTab === tabs.PERSONAL_FEED">
     <h2>Personal Feed</h2>
     <p>personal feed</p>
   </div>
@@ -11,8 +11,22 @@
   export default {
     name: 'personal-feed',
     components: { Posts },
+    data: () => ({
+      store: {},
+    }),
     mounted() {
-      console.log(this.$vnode.tag, this.$root.$data.store);
+      this.store = this.$root.$data.store;
+    },
+    computed: {
+      state() {
+        return this.store.state || {};
+      },
+      tabs() {
+        return this.state.tabs || {};
+      },
+      currentTab() {
+        return this.state.currentTab || {};
+      },
     },
   }
 </script>

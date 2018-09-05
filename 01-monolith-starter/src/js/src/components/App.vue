@@ -17,9 +17,6 @@
       PublicFeed,
       PersonalFeed,
     },
-    mounted() {
-      console.log(this.$vnode.tag, this.$root.$data.store);
-    },
   }
 </script>
 

@@ -11,7 +11,7 @@
       'post',
     ],
     mounted() {
-      console.log(this.$vnode.tag, this.props.post);
+      //console.log(this.$vnode.tag, this.props.post);
     },
   }
 </script>

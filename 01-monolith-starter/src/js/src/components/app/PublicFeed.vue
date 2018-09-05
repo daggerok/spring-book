@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="public-feed"
-       v-if="this.$root.$data.store.state.currentTab === this.$root.$data.store.state.tabs.publicFeed">
+       v-if="currentTab === tabs.PUBLIC_FEED">
     <h2>Public Feed</h2>
     <p>public feed</p>
   </div>
@@ -11,8 +11,22 @@
   export default {
     name: 'public-feed',
     components: { Posts },
+    data: () => ({
+      store: {},
+    }),
     mounted() {
-      console.log(this.$vnode.tag, this.$root.$data.store);
+      this.store = this.$root.$data.store;
+    },
+    computed: {
+      state() {
+        return this.store.state || {};
+      },
+      tabs() {
+        return this.state.tabs || {};
+      },
+      currentTab() {
+        return this.state.currentTab || {};
+      },
     },
   }
 </script>
